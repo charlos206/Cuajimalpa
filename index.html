@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuidados para tu Planta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url('https://static.nationalgeographicla.com/files/styles/image_3200/public/29621591643_6a5d84a7a8_o.webp?w=1600&h=900');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 0;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #ff8c42;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a {
+            padding: 25px 20px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: #ff8c42;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff8c42;
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        /* Dropdown menu styles */
+        .nav-item-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 10px 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .nav-item-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            padding: 15px 20px;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .dropdown-menu a::after {
+            display: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255, 140, 66, 0.2);
+        }
+
+        .btn-identify {
+            display: none;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background: linear-gradient(135deg, #2d5016 0%, #1a2f0c 100%);
+            padding: 80px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero-title .highlight {
+            color: #ff8c42;
+            display: block;
+            font-size: 4rem;
+            margin-top: 10px;
+        }
+
+        .hero-mission {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 140, 66, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+        }
+
+        .hero-mission strong {
+            color: #ff8c42;
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-title .highlight {
+                font-size: 2.5rem;
+            }
+
+            .hero-mission {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+
+            .hero-mission strong {
+                font-size: 1.2rem;
+            }
+        }
+
+        .titulo-principal {
+            background-color: #ff8c42;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .titulo-principal h1 {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .seccion {
+            padding: 40px 30px;
+        }
+
+        .seccion-naranja {
+            background-color: #ff8c42;
+            color: white;
+        }
+
+        .seccion-clara {
+            background-color: white;
+        }
+
+        .seccion h2 {
+            font-size: 1.8rem;
+            color: #2d5016;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .seccion-naranja h2 {
+            color: white;
+        }
+
+        .seccion p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .contenido-flex {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .imagen-decorativa {
+            flex: 0 0 250px;
+            height: 200px;
+            background: linear-gradient(135deg, #6b8e23, #556b2f);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            line-height: 1;
+        }
+
+        .texto-contenido {
+            flex: 1;
+        }
+
+        .formulario-subir {
+            background: linear-gradient(135deg, #6b8e23, #556b2f);
+            padding: 50px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .formulario-subir h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .formulario-intro {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .form-grupo {
+            margin-bottom: 25px;
+        }
+
+        .form-grupo label {
+            display: block;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-grupo .aclaracion {
+            color: #ffeb99;
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        .form-grupo input[type="text"],
+        .form-grupo input[type="file"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ff8c42;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: white;
+            transition: border-color 0.3s;
+        }
+
+        .form-grupo input[type="text"]:focus,
+        .form-grupo input[type="file"]:focus {
+            outline: none;
+            border-color: #ffeb99;
+        }
+
+        .form-grupo input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .aviso-publico {
+            background-color: rgba(255, 140, 66, 0.2);
+            border-left: 4px solid #ff8c42;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .aviso-publico p {
+            color: white;
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-top: 4px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-container label {
+            color: white;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8c42;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-enviar:hover {
+            background-color: #e67a35;
+            transform: translateY(-2px);
+        }
+
+        .btn-enviar:active {
+            transform: translateY(0);
+        }
+
+        /* Estilos para el popup de bibliografía */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+        }
+
+        .popup-contenido {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .popup-cerrar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff8c42;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .popup-cerrar:hover {
+            background-color: #e67a35;
+        }
+
+        .popup-titulo {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 3px solid #ff8c42;
+            padding-bottom: 15px;
+        }
+
+        .popup-seccion {
+            margin-bottom: 30px;
+        }
+
+        .popup-seccion h3 {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .popup-seccion h3::before {
+            content: '📚';
+            font-size: 1.5rem;
+        }
+
+        .popup-seccion ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .popup-seccion li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f5f5f5;
+            border-left: 4px solid #ff8c42;
+            border-radius: 5px;
+        }
+
+        .popup-seccion a {
+            color: #2d5016;
+            text-decoration: none;
+            word-break: break-all;
+            transition: color 0.3s;
+        }
+
+        .popup-seccion a:hover {
+            color: #ff8c42;
+            text-decoration: underline;
+        }
+
+        .galeria-seccion {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #2d5016, #1a2f0c);
+            padding: 80px 30px 50px;
+            position: relative;
+        }
+
+        .galeria-titulo {
+            text-align: center;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .galeria-titulo h2 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .galeria-subtitulo {
+            text-align: center;
+            color: #ffeb99;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .galeria-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .galeria-grid {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 10px 0;
+        }
+
+        .galeria-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .galeria-item {
+            min-width: 300px;
+            flex-shrink: 0;
+        }
+
+        .galeria-flecha {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 140, 66, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .galeria-flecha:hover {
+            background-color: #ff8c42;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .galeria-flecha-izq {
+            left: 10px;
+        }
+
+        .galeria-flecha-der {
+            right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .galeria-flecha {
+                display: none;
+            }
+
+            .galeria-item {
+                min-width: 280px;
+            }
+
+            .btn-identify {
+                display: inline-block;
+                background: linear-gradient(135deg, #ff8c42, #e67a35);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 0.9rem;
+                transition: all 0.3s;
+            }
+
+            .btn-identify:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(255, 140, 66, 0.4);
+            }
+
+            .nav-item-dropdown .dropdown-menu {
+                display: none;
+            }
+
+            .nav-item-dropdown > a::after {
+                display: none;
+            }
+        }
+
+        /* Estilos para la sección de ecosistemas endémicos */
+        .ecosistemas-seccion {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 80px 30px;
+            position: relative;
+        }
+
+        .ecosistemas-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .ecosistemas-header h2 {
+            font-size: 2.8rem;
+            color: #2d5016;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .ecosistemas-intro {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #333;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .ecosistemas-invitacion {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #ff8c42;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #ff8c42;
+            box-shadow: 0 3px 10px rgba(255, 140, 66, 0.2);
+        }
+
+        .ecosistemas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .ecosistema-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid transparent;
+        }
+
+        .ecosistema-card:hover {
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 20px 50px rgba(45, 80, 22, 0.25);
+            border-color: #ff8c42;
+        }
+
+        .ecosistema-imagen-wrapper {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .ecosistema-imagen-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 140, 66, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .ecosistema-imagen {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));
+            transition: transform 0.5s ease;
+        }
+
+        .ecosistema-card:hover .ecosistema-imagen {
+            transform: scale(1.1);
+        }
+
+        .ecosistema-info {
+            padding: 30px;
+            background: white;
+        }
+
+        .ecosistema-nombre {
+            font-size: 1.8rem;
+            color: #2d5016;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid #ff8c42;
+            padding-bottom: 10px;
+        }
+
+        .ecosistema-descripcion {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .ecosistemas-header h2 {
+                font-size: 2rem;
+            }
+
+            .ecosistemas-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .ecosistema-imagen-wrapper {
+                height: 250px;
+            }
+
+            .ecosistema-nombre {
+                font-size: 1.4rem;
+            }
+        }
+
+        .galeria-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .galeria-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .galeria-item-imagen {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #6b8e23, #556b2f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .galeria-item-imagen::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .galeria-item-info {
+            padding: 20px;
+            background: white;
+        }
+
+        .galeria-item-info h3 {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .galeria-item-info p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .galeria-seccion {
+                padding: 60px 20px 40px;
+            }
+
+            .galeria-titulo h2 {
+                font-size: 2rem;
+            }
+
+            .galeria-subtitulo {
+                font-size: 1rem;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        footer {
+            background-color: #2d5016;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                background: linear-gradient(180deg, #2d5016 0%, #3d6b1f 100%);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            nav.active {
+                display: flex;
+                animation: slideDown 0.3s ease;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            nav a {
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid rgba(255, 140, 66, 0.3);
+                text-align: left;
+                padding-left: 40px;
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+
+            nav a::after {
+                display: none;
+            }
+
+            nav a:hover {
+                background-color: rgba(255, 140, 66, 0.2);
+                padding-left: 50px;
+            }
+
+            .titulo-principal h1 {
+                font-size: 1.8rem;
+            }
+
+            .seccion {
+                padding: 30px 20px;
+            }
+
+            .seccion h2 {
+                font-size: 1.4rem;
+            }
+
+            .seccion p {
+                font-size: 1rem;
+            }
+
+            .contenido-flex {
+                flex-direction: column;
+            }
+
+            .imagen-decorativa {
+                width: 100%;
+                flex: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 18px 30px;
+            }
+
+            .titulo-principal h1 {
+                font-size: 1.5rem;
+            }
+
+            .seccion {
+                padding: 25px 15px;
+            }
+
+            .seccion h2 {
+                font-size: 1.2rem;
+            }
+
+            .seccion p {
+                font-size: 0.95rem;
+            }
+
+            .imagen-decorativa {
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+
+        /* Estilos para el modal de identificación de plantas */
+        .identify-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .identify-modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .identify-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .identify-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff8c42;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .identify-modal-close:hover {
+            background-color: #e67a35;
+            transform: rotate(90deg);
+        }
+
+        .identify-modal h2 {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .identify-modal-subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .identify-upload-section {
+            border: 3px dashed #ff8c42;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff8f0, #ffffff);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .identify-upload-section:hover {
+            border-color: #2d5016;
+            background: linear-gradient(135deg, #f0fff0, #ffffff);
+        }
+
+        .identify-file-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #2d5016, #3d6b1f);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .identify-file-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
+        }
+
+        #plant-file-input {
+            display: none;
+        }
+
+        .identify-file-name {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        #analyze-plant-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff8c42, #e67a35);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        #analyze-plant-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
+        }
+
+        #analyze-plant-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #plant-result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            min-height: 50px;
+        }
+
+        .plant-result-success {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 2px solid #2d5016;
+        }
+
+        .plant-result-error {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border: 2px solid #c62828;
+            color: #c62828;
+        }
+
+        .plant-result-loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .plant-info {
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .plant-info-image {
+            flex: 0 0 150px;
+        }
+
+        .plant-info-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .plant-info-details {
+            flex: 1;
+        }
+
+        .plant-info-details h3 {
+            color: #2d5016;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .plant-info-details .scientific-name {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .plant-info-details .confidence {
+            display: inline-block;
+            background: #ff8c42;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .identify-modal {
+                padding: 30px 20px;
+            }
+
+            .plant-info {
+                flex-direction: column;
+            }
+
+            .plant-info-image {
+                flex: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="nav-container">
+                <div class="logo">Plantas<span>UAM</span></div>
+                <button class="btn-identify" onclick="abrirIdentificador(event)">🔍 Identifica tu planta</button>
+                <button class="menu-toggle" onclick="this.nextElementSibling.classList.toggle('active')">☰</button>
+                <nav>
+                    <a href="#cuidado">Cuidado de mi planta</a>
+                    <a href="#endemicas">Plantas endémicas</a>
+                    <a href="#galeria">Galería</a>
+                    <div class="nav-item-dropdown">
+                        <a href="#sube">Sube tu planta</a>
+                        <div class="dropdown-menu">
+                            <a href="#" onclick="abrirIdentificador(event)">🔍 Identifica tu planta</a>
+                        </div>
+                    </div>
+                    <a href="#" onclick="abrirBibliografia(event)">Bibliografía</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-icon">🌱🌎🌿</div>
+                <h1 class="hero-title">
+                    Cuida el Planeta
+                    <span class="highlight">Una Planta a la Vez</span>
+                </h1>
+                <div class="hero-mission">
+                    <strong>🎯 Nuestra Misión</strong>
+                    Incentivar a que los individuos demuestren prácticas que se pueden ejecutar en la vida diaria y faciliten el salvaguardar el medio ambiente
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion seccion-clara" id="cuidado">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #2d5016; margin-bottom: 40px; text-transform: uppercase;">🌿 Cuidados para tu Planta 🌿</h2>
+            <div class="contenido-flex">
+                <div class="imagen-decorativa">🌱</div>
+                <div class="texto-contenido">
+                    <h2>ELIGE EL LUGAR CORRECTO:</h2>
+                    <p>Cada planta necesita una cantidad distinta de luz. Coloca las que requieren más sol cerca de ventanas luminosas y las de sombra en rincones con luz indirecta.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion seccion-naranja">
+            <div class="contenido-flex">
+                <div class="texto-contenido">
+                    <h2>NO LAS RIEGUES<br>DE MÁS:</h2>
+                    <p>El exceso de agua es una de las causas más comunes de muerte en plantas de interior. Toca la tierra antes de regar: si sigue húmeda, espera unos días más.</p>
+                </div>
+                <div class="imagen-decorativa">💧</div>
+            </div>
+        </section>
+
+        <section class="seccion seccion-clara">
+            <div class="contenido-flex">
+                <div class="imagen-decorativa">🍃</div>
+                <div class="texto-contenido">
+                    <h2>LIMPIA SUS HOJAS:</h2>
+                    <p>Las hojas acumulan polvo, lo que impide la correcta fotosíntesis. Pasa un paño húmedo con cuidado una vez por semana para mantenerlas saludables.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion seccion-naranja">
+            <div class="contenido-flex">
+                <div class="texto-contenido">
+                    <h2>RÓTALAS DE VEZ EN CUANDO:</h2>
+                    <p>Gira tus plantas cada 1 o 2 semanas para que crezcan de forma pareja. Así evitarás que se inclinen hacia la luz y mantendrán una forma armónica.</p>
+                </div>
+                <div class="imagen-decorativa">🌿</div>
+            </div>
+        </section>
+
+        <section class="ecosistemas-seccion" id="endemicas">
+            <div class="ecosistemas-header">
+                <h2>🌿 Ecosistemas de Cuajimalpa de Morelos 🌿</h2>
+            </div>
+            
+            <p class="ecosistemas-intro">
+                Cuajimalpa de Morelos es hogar de una extraordinaria diversidad de ecosistemas. 
+                Cada uno alberga especies únicas de flora y fauna que forman parte del patrimonio natural de la región. 
+                Esta es una pequeña guía de los principales ecosistemas que puedes encontrar en la zona.
+            </p>
+
+            <div class="ecosistemas-invitacion">
+                🔎 ¡Te invitamos a explorar y compartir tus descubrimientos! Si encuentras plantas o ecosistemas 
+                en la naturaleza de Cuajimalpa, no dudes en compartir tus fotos en nuestra galería.
+            </div>
+
+            <div class="ecosistemas-grid">
+                <div class="ecosistema-card">
+                    <div class="ecosistema-imagen-wrapper">
+                        <img src="Fotos/BOSQUE DE ENCINO.jpg" alt="Bosque de Encino" class="ecosistema-imagen">
+                    </div>
+                    <div class="ecosistema-info">
+                        <h3 class="ecosistema-nombre">Bosque de Encino</h3>
+                        <p class="ecosistema-descripcion">
+                            Los bosques de encino son fundamentales en Cuajimalpa, dominados por árboles del género Quercus. 
+                            Este ecosistema es vital para la captación de agua, control de erosión y alberga una gran biodiversidad 
+                            de aves, mamíferos e insectos. Sus árboles robustos y hojas perennes crean un ambiente único.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ecosistema-card">
+                    <div class="ecosistema-imagen-wrapper">
+                        <img src="Fotos/BOSQUE DE OYAMEL.jpg" alt="Bosque de Oyamel" class="ecosistema-imagen">
+                    </div>
+                    <div class="ecosistema-info">
+                        <h3 class="ecosistema-nombre">Bosque de Oyamel</h3>
+                        <p class="ecosistema-descripcion">
+                            El bosque de oyamel (Abies religiosa) se encuentra en las zonas más altas y frías de Cuajimalpa. 
+                            Estos majestuosos árboles coníferos crean un ambiente húmedo y fresco, esencial para especies 
+                            como la mariposa monarca. Su conservación es crucial para el equilibrio ecológico regional.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ecosistema-card">
+                    <div class="ecosistema-imagen-wrapper">
+                        <img src="Fotos/BOSQUE DE PINO.jpg" alt="Bosque de Pino" class="ecosistema-imagen">
+                    </div>
+                    <div class="ecosistema-info">
+                        <h3 class="ecosistema-nombre">Bosque de Pino</h3>
+                        <p class="ecosistema-descripcion">
+                            Los bosques de pino dominan grandes extensiones de Cuajimalpa, con especies como Pinus montezumae. 
+                            Estos ecosistemas son esenciales para la producción de oxígeno, captación de agua y prevención 
+                            de deslaves. Además, proporcionan refugio a numerosas especies de fauna silvestre.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ecosistema-card">
+                    <div class="ecosistema-imagen-wrapper">
+                        <img src="Fotos/BOSQUE MESÓFILO DE MONTAÑA.jpg" alt="Bosque Mesófilo de Montaña" class="ecosistema-imagen">
+                    </div>
+                    <div class="ecosistema-info">
+                        <h3 class="ecosistema-nombre">Bosque Mesófilo de Montaña</h3>
+                        <p class="ecosistema-descripcion">
+                            Este es uno de los ecosistemas más diversos y amenazados de México. Se caracteriza por su alta 
+                            humedad, niebla constante y gran variedad de especies endémicas. En Cuajimalpa, estos bosques 
+                            albergan helechos, orquídeas, bromelias y árboles de hoja ancha en un ambiente místico.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ecosistema-card">
+                    <div class="ecosistema-imagen-wrapper">
+                        <img src="Fotos/MATORRAL XERÓFILO.jpg" alt="Matorral Xerófilo" class="ecosistema-imagen">
+                    </div>
+                    <div class="ecosistema-info">
+                        <h3 class="ecosistema-nombre">Matorral Xerófilo</h3>
+                        <p class="ecosistema-descripcion">
+                            Aunque menos común en Cuajimalpa, el matorral xerófilo representa zonas más secas y cálidas. 
+                            Está compuesto por arbustos resistentes, cactáceas y plantas adaptadas a la escasez de agua. 
+                            Este ecosistema muestra la increíble capacidad de adaptación de las plantas a condiciones extremas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ecosistema-card">
+                    <div class="ecosistema-imagen-wrapper">
+                        <img src="Fotos/PASTIZAL.jpg" alt="Pastizal" class="ecosistema-imagen">
+                    </div>
+                    <div class="ecosistema-info">
+                        <h3 class="ecosistema-nombre">Pastizal</h3>
+                        <p class="ecosistema-descripcion">
+                            Los pastizales de Cuajimalpa se encuentran en áreas abiertas y claros del bosque. Dominados por 
+                            gramíneas y hierbas, estos ecosistemas son importantes para la ganadería sostenible y albergan 
+                            especies de aves rapaces, roedores y reptiles. Son esenciales para mantener la diversidad del paisaje.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="galeria-seccion" id="galeria">
+            <div class="galeria-titulo">
+                <h2>🌿 GALERÍA 🌿</h2>
+            </div>
+            <p class="galeria-subtitulo">Plantas endémicas de Cuajimalpa subidas por usuarios</p>
+
+            <div class="galeria-container">
+                <button class="galeria-flecha galeria-flecha-izq" onclick="moverGaleria(-1)">‹</button>
+                <button class="galeria-flecha galeria-flecha-der" onclick="moverGaleria(1)">›</button>
+                
+                <div class="galeria-grid" id="galeriaGrid">
+                    <div class="galeria-item">
+                        <div class="galeria-item-imagen">🌳</div>
+                        <div class="galeria-item-info">
+                            <h3>Walter - Encino</h3>
+                            <p>Hermoso encino encontrado en el bosque de Cuajimalpa</p>
+                        </div>
+                    </div>
+
+                    <div class="galeria-item">
+                        <div class="galeria-item-imagen">🌺</div>
+                        <div class="galeria-item-info">
+                            <h3>Ana - Dalia</h3>
+                            <p>Dalia silvestre de la región montañosa</p>
+                        </div>
+                    </div>
+
+                    <div class="galeria-item">
+                        <div class="galeria-item-imagen">🌲</div>
+                        <div class="galeria-item-info">
+                            <h3>Carlos - Pino</h3>
+                            <p>Pino característico de la zona alta de Cuajimalpa</p>
+                        </div>
+                    </div>
+
+                    <div class="galeria-item">
+                        <div class="galeria-item-imagen">🌿</div>
+                        <div class="galeria-item-info">
+                            <h3>María - Helecho</h3>
+                            <p>Helecho endémico de zonas húmedas del bosque</p>
+                        </div>
+                    </div>
+
+                    <div class="galeria-item">
+                        <div class="galeria-item-imagen">🌸</div>
+                        <div class="galeria-item-info">
+                            <h3>Pedro - Orquídea</h3>
+                            <p>Orquídea silvestre encontrada en la cañada</p>
+                        </div>
+                    </div>
+
+                    <div class="galeria-item">
+                        <div class="galeria-item-imagen">🍃</div>
+                        <div class="galeria-item-info">
+                            <h3>Laura - Madroño</h3>
+                            <p>Madroño característico del ecosistema local</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion seccion-clara" id="sube">
+            <div class="formulario-subir">
+                <h2>🌱 SUBE TU PLANTA 🌱</h2>
+                <p class="formulario-intro">
+                    ¡Comparte tu planta endémica de Cuajimalpa con la comunidad! Sube una foto de tu planta o de alguna que te hayamos compartido. Esta sección es para celebrar la biodiversidad local.
+                </p>
+
+                <form id="form-planta">
+                    <div class="form-grupo">
+                        <label>
+                            Apodo y nombre de la planta
+                            <span class="aclaracion">(No incluyas tu nombre completo ni información personal)</span>
+                        </label>
+                        <input type="text" name="apodo" placeholder="Ejemplo: Walter - Encino" required>
+                    </div>
+
+                    <div class="aviso-publico">
+                        <p><strong>⚠️ Aviso importante:</strong> La imagen que subas será pública y visible para cualquier persona que visite esta página web.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label>
+                            Imagen de tu planta
+                            <span class="aclaracion">(Solo plantas endémicas de Cuajimalpa)</span>
+                        </label>
+                        <input type="file" name="imagen" accept="image/*" required>
+                    </div>
+
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="acepto" name="acepto" required>
+                        <label for="acepto">
+                            Acepto que la imagen será de uso público, cualquier persona que entre a esta página podrá verla. 
+                            Confirmo que es una planta endémica de Cuajimalpa y que no estoy subiendo otro tipo de contenido.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-enviar">Subir mi planta</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>Hecho por alumnos de UAM Cuajimalpa de Estudios Socioterritoriales</p>
+        </footer>
+    </div>
+
+    <!-- Popup de Bibliografía -->
+    <div class="popup-overlay" id="popupBibliografia" onclick="cerrarBibliografia(event)">
+        <div class="popup-contenido" onclick="event.stopPropagation()">
+            <button class="popup-cerrar" onclick="cerrarBibliografia()">&times;</button>
+            <h2 class="popup-titulo">Bibliografía</h2>
+            
+            <div class="popup-seccion">
+                <h3>Equipo</h3>
+                <ul>
+                    <li>Ramirez Rodriguez Judith Samai</li>
+                    <li>Millan Tapia Gustavo</li>
+                    <li>Flores Olguin Carlos Raul</li>
+                    <li>Hernández Trejo Mauricio Yael</li>
+                    <li>Guzmán Morales Santiago Isaac</li>
+                </ul>
+            </div>
+
+            <div class="popup-seccion">
+                <h3>Referencias</h3>
+                <ul>
+                    <li>
+                        FAO. (s.f.). <em>Cuidado de plantas</em>. 
+                        <br>
+                        <a href="https://www.fao.org/4/w1309s/w1309s07.htm" target="_blank">
+                            https://www.fao.org/4/w1309s/w1309s07.htm
+                        </a>
+                    </li>
+                    <li>
+                        CONABIO. (2020). <em>Biodiversidad en la alcaldía Cuajimalpa de Morelos</em>. Comisión Nacional para el Conocimiento y Uso de la Biodiversidad.
+                        <br>
+                        <a href="https://www.biodiversidad.gob.mx/region/EEB/pdf/Cuajimalpa_ficha.pdf" target="_blank">
+                            https://www.biodiversidad.gob.mx/region/EEB/pdf/Cuajimalpa_ficha.pdf
+                        </a>
+                    </li>
+                    <li>
+                        SEDEMA. (2019). <em>Ecosistemas del Suelo de Conservación de la Ciudad de México</em>. Secretaría del Medio Ambiente de la Ciudad de México.
+                        <br>
+                        <a href="https://www.sedema.cdmx.gob.mx" target="_blank">
+                            https://www.sedema.cdmx.gob.mx
+                        </a>
+                    </li>
+                    <li>
+                        Rzedowski, J. (2006). <em>Vegetación de México</em>. 1ra Edición digital. Comisión Nacional para el Conocimiento y Uso de la Biodiversidad.
+                    </li>
+                    <li>
+                        Pl@ntNet. (2024). <em>Plant Identification API</em>. CIRAD, INRAE, INRIA, IRD & Tela Botanica.
+                        <br>
+                        <a href="https://plantnet.org" target="_blank">
+                            https://plantnet.org
+                        </a>
+                        <br>
+                        <small style="color: #999;">API utilizada para la identificación de plantas mediante imágenes.</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Identificación de Plantas -->
+    <div class="identify-modal-overlay" id="identifyModal">
+        <div class="identify-modal">
+            <button class="identify-modal-close" onclick="cerrarIdentificador()">&times;</button>
+            <h2>🔍 Identifica tu Planta</h2>
+            <p class="identify-modal-subtitle">Sube una foto y descubre qué planta es</p>
+            
+            <div class="identify-upload-section">
+                <label for="plant-file-input" class="identify-file-label">
+                    📷 Seleccionar Imagen
+                </label>
+                <input type="file" id="plant-file-input" accept="image/*">
+                <div class="identify-file-name" id="fileName">No se ha seleccionado ninguna imagen</div>
+            </div>
+
+            <button id="analyze-plant-btn">Analizar Planta</button>
+            
+            <div id="plant-result"></div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 10px; font-size: 0.75rem; color: #666; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;"><strong>Servicio proporcionado por:</strong> Pl@ntNet API</p>
+                <p style="margin: 0 0 8px 0;"><strong>Misión:</strong> Pl@ntNet es un proyecto de ciencia ciudadana dedicado a la identificación de plantas mediante imágenes, desarrollado por científicos de CIRAD, INRAE, INRIA e IRD en colaboración con el consorcio Tela Botanica.</p>
+                <p style="margin: 0;"><strong>Aviso:</strong> Al utilizar este servicio, las imágenes que subas serán procesadas por Pl@ntNet. No tenemos control sobre el almacenamiento o uso de las imágenes enviadas a esta plataforma externa. Para más información, visita <a href="https://plantnet.org" target="_blank" style="color: #2d5016;">plantnet.org</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Pl@ntNet API
+        const PLANTNET_API_KEY = '2b10VSuF0cRgbp18pZhkC2kQu';
+        const PLANTNET_API_URL = 'https://my-api.plantnet.org/v2/identify/all';
+
+        // Funciones para el modal de identificación
+        function abrirIdentificador(event) {
+            event.preventDefault();
+            document.getElementById('identifyModal').classList.add('active');
+            document.getElementById('plant-result').innerHTML = '';
+            document.getElementById('plant-file-input').value = '';
+            document.getElementById('fileName').textContent = 'No se ha seleccionado ninguna imagen';
+        }
+
+        function cerrarIdentificador() {
+            document.getElementById('identifyModal').classList.remove('active');
+        }
+
+        // Mostrar nombre del archivo seleccionado
+        document.getElementById('plant-file-input').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No se ha seleccionado ninguna imagen';
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        // Analizar planta usando Pl@ntNet API
+        document.getElementById('analyze-plant-btn').addEventListener('click', async function() {
+            const fileInput = document.getElementById('plant-file-input');
+            const resultDiv = document.getElementById('plant-result');
+            const analyzeBtn = document.getElementById('analyze-plant-btn');
+
+            // Validar que haya una imagen
+            if (!fileInput.files || !fileInput.files[0]) {
+                resultDiv.className = 'plant-result-error';
+                resultDiv.innerHTML = '<strong>⚠️ Error:</strong> Por favor selecciona una imagen primero.';
+                return;
+            }
+
+            // Mostrar loading
+            resultDiv.className = 'plant-result-loading';
+            resultDiv.innerHTML = '🔄 Analizando tu planta... Por favor espera.';
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = 'Analizando...';
+
+            try {
+                const file = fileInput.files[0];
+                
+                // Crear FormData para enviar la imagen
+                const formData = new FormData();
+                formData.append('images', file);
+                formData.append('organs', 'auto');
+
+                // Usar proxy CORS para evitar el error de CORS
+                const corsProxy = 'https://corsproxy.io/?';
+                const apiUrl = `${corsProxy}${encodeURIComponent(PLANTNET_API_URL + '?api-key=' + PLANTNET_API_KEY)}`;
+
+                // Hacer petición a Pl@ntNet a través del proxy
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `Error ${response.status}: No se pudo procesar la imagen`);
+                }
+
+                const data = await response.json();
+
+                // Verificar si hay resultados
+                if (!data.results || data.results.length === 0) {
+                    throw new Error('No se pudo identificar la planta. Intenta con una imagen más clara de hojas, flores o frutos.');
+                }
+
+                // Obtener el mejor resultado
+                const bestMatch = data.results[0];
+                const scientificName = bestMatch.species.scientificNameWithoutAuthor || 'Desconocido';
+                const commonNames = bestMatch.species.commonNames || [];
+                const commonName = commonNames.length > 0 ? commonNames[0] : scientificName;
+                const probability = (bestMatch.score * 100).toFixed(1);
+                const family = bestMatch.species.family?.scientificNameWithoutAuthor || '';
+                const genus = bestMatch.species.genus?.scientificNameWithoutAuthor || '';
+
+                // Obtener imagen de referencia si existe
+                let imageUrl = '';
+                if (bestMatch.images && bestMatch.images.length > 0) {
+                    imageUrl = bestMatch.images[0].url.m || bestMatch.images[0].url.o || '';
+                }
+
+                // Mostrar resultado
+                resultDiv.className = 'plant-result-success';
+                resultDiv.innerHTML = `
+                    <div class="plant-info">
+                        ${imageUrl ? `
+                            <div class="plant-info-image">
+                                <img src="${imageUrl}" alt="${commonName}" onerror="this.parentElement.style.display='none'">
+                            </div>
+                        ` : ''}
+                        <div class="plant-info-details">
+                            <h3>✅ ${commonName}</h3>
+                            <p class="scientific-name"><em>${scientificName}</em></p>
+                            ${family ? `<p style="color: #666; font-size: 0.9rem; margin: 5px 0;">Familia: ${family}</p>` : ''}
+                            ${genus ? `<p style="color: #666; font-size: 0.9rem; margin: 5px 0;">Género: ${genus}</p>` : ''}
+                            <span class="confidence">Confianza: ${probability}%</span>
+                            ${data.results.length > 1 ? `<p style="color: #999; font-size: 0.85rem; margin-top: 10px;">Se encontraron ${data.results.length} posibles coincidencias</p>` : ''}
+                        </div>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error completo:', error);
+                resultDiv.className = 'plant-result-error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = 'Analizar Planta';
+            }
+        });
+
+        // Función auxiliar para convertir archivo a base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('identifyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarIdentificador();
+            }
+        });
+
+        // Función para mover la galería con flechas
+        function moverGaleria(direccion) {
+            const galeria = document.getElementById('galeriaGrid');
+            const desplazamiento = 330; // ancho del item + gap
+            galeria.scrollBy({
+                left: direccion * desplazamiento,
+                behavior: 'smooth'
+            });
+        }
+
+        // Funciones para el popup de bibliografía
+        function abrirBibliografia(event) {
+            event.preventDefault();
+            document.getElementById('popupBibliografia').classList.add('active');
+        }
+
+        function cerrarBibliografia(event) {
+            if (event) event.preventDefault();
+            document.getElementById('popupBibliografia').classList.remove('active');
+        }
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                cerrarBibliografia();
+            }
+        });
+
+        // Configuración de Supabase
+        const SUPABASE_URL = 'https://uigmrgfymxlesgbxszfi.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpZ21yZ2Z5bXhsZXNnYnhzemZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5NjE2MDMsImV4cCI6MjA4MDUzNzYwM30.ARvnVvYXRI8vkkZjwtLe59isKM5ARYwVZeZF5SyZ_us';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Manejar envío del formulario
+        document.getElementById('form-planta').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const apodo = form.apodo.value.trim();
+            const imagenFile = form.imagen.files[0];
+            const acepto = form.acepto.checked;
+            
+            // Validar que todos los campos estén completos
+            if (!apodo) {
+                alert('Por favor ingresa tu apodo y el nombre de la planta');
+                return;
+            }
+            
+            if (!imagenFile) {
+                alert('Por favor selecciona una imagen');
+                return;
+            }
+            
+            if (!acepto) {
+                alert('Debes aceptar los términos para continuar');
+                return;
+            }
+            
+            // Deshabilitar botón mientras se sube
+            const btnEnviar = form.querySelector('.btn-enviar');
+            btnEnviar.disabled = true;
+            btnEnviar.textContent = 'Subiendo...';
+            
+            try {
+                // Generar nombre único para la imagen
+                const timestamp = Date.now();
+                const fileName = `${timestamp}_${imagenFile.name}`;
+                
+                // Subir imagen a Supabase Storage en el bucket 'Imagen'
+                const { data: uploadData, error: uploadError } = await supabase.storage
+                    .from('Imagen')
+                    .upload(fileName, imagenFile);
+                
+                if (uploadError) throw uploadError;
+                
+                // Obtener URL pública de la imagen
+                const { data: urlData } = supabase.storage
+                    .from('Imagen')
+                    .getPublicUrl(fileName);
+                
+                const imagenUrl = urlData.publicUrl;
+                
+                // Guardar información en la tabla 'Subidas'
+                const { data: dbData, error: dbError } = await supabase
+                    .from('Subidas')
+                    .insert([
+                        {
+                            Text: apodo,
+                            Image: imagenUrl
+                        }
+                    ]);
+                
+                if (dbError) throw dbError;
+                
+                alert('¡Tu planta se ha subido exitosamente! 🌱');
+                form.reset();
+                
+                // Recargar galería
+                cargarGaleria();
+                
+            } catch (error) {
+                console.error('Error completo:', error);
+                let mensaje = 'Hubo un error al subir tu planta. ';
+                if (error.message) {
+                    mensaje += 'Detalle: ' + error.message;
+                }
+                alert(mensaje);
+            } finally {
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = 'Subir mi planta';
+            }
+        });
+        
+        // Cargar galería desde Supabase
+        async function cargarGaleria() {
+            try {
+                const { data, error } = await supabase
+                    .from('Subidas')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (error) throw error;
+                
+                if (data && data.length > 0) {
+                    const galeriaGrid = document.getElementById('galeriaGrid');
+                    galeriaGrid.innerHTML = '';
+                    
+                    data.forEach(planta => {
+                        const item = document.createElement('div');
+                        item.className = 'galeria-item';
+                        item.innerHTML = `
+                            <div class="galeria-item-imagen" style="background-image: url('${planta.Image}'); background-size: cover; background-position: center;">
+                            </div>
+                            <div class="galeria-item-info">
+                                <h3>${planta.Text}</h3>
+                                <p>Planta endémica de Cuajimalpa</p>
+                            </div>
+                        `;
+                        galeriaGrid.appendChild(item);
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar galería:', error);
+                // Si no hay datos, mantener la galería de ejemplo
+            }
+        }
+        
+        // Cargar galería al inicio
+        cargarGaleria();
+    </script>
+</body>
+</html>
